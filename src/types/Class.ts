@@ -1,4 +1,4 @@
-const names = [
+export const names = [
     'Arcanist',
     'Artillerist',
     'Artist',
@@ -22,7 +22,7 @@ const names = [
     'Summoner',
     'Wardancer',
 ] as const;
-type ClassName = typeof names[number];
+export type ClassName = typeof names[number];
 
 export type Class = {
     name: ClassName;
