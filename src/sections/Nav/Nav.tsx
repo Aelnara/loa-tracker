@@ -2,6 +2,7 @@
 import React, { useContext } from 'react';
 import { css } from '@emotion/react';
 import { NavContext, NavContextType } from '../../contexts/NavContext';
+import Colors from '../../constants/Colors';
 
 const Nav: React.FC = () => {
     const { navState, changeNavState } = useContext(NavContext) as NavContextType;
@@ -19,7 +20,7 @@ const Nav: React.FC = () => {
 };
 
 const containerStyles = css`
-    background-color: #222222;
+    background-color: ${Colors.GRAY_LIGHT};
     height: 60px;
     width: 100%;
     display: flex;
@@ -35,14 +36,13 @@ const linkStyles = (active: boolean) => css`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    color: #faf9f6;
-    color: ${active ? '#FFD700' : '#faf9f6'};
+    color: ${active ? Colors.GOLD : Colors.WHITE};
     box-sizing: border-box;
     position: relative;
     transition: all 0.1s ease-in-out;
 
     &:hover {
-        color: #ffd700;
+        color: ${Colors.GOLD};
     }
 
     &:after {
@@ -52,7 +52,7 @@ const linkStyles = (active: boolean) => css`
         left: 50%;
         bottom: 0;
         position: absolute;
-        background-color: #ffd700;
+        background-color: ${Colors.GOLD};
         border-radius: 12px;
         transform: translateX(-50%);
         transition: width 0.1s ease-in-out;
