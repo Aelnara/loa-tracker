@@ -22,9 +22,5 @@ export const names = [
     'Summoner',
     'Wardancer',
 ] as const;
-export type ClassName = typeof names[number];
 
-export type Class = {
-    name: ClassName;
-    icon: string;
-};
+export type ClassName = typeof names[number];
