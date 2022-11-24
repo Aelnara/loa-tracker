@@ -1,16 +1,12 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useReducer } from 'react';
 import { Character } from '../types/Character';
-import class_shadowhunter from '../assets/icons/class_shadowhunter.png';
-import class_deathblade from '../assets/icons/class_deathblade.png';
-import class_reaper from '../assets/icons/class_reaper.png';
-import class_sorceress from '../assets/icons/class_sorceress.png';
-import class_gunslinger from '../assets/icons/class_gunslinger.png';
-import class_glaivier from '../assets/icons/class_glaivier.png';
+import rosterReducer, { RosterAction } from '../reducers/rosterReducer';
 
 export const RosterContext = createContext<RosterContextType | null>(null);
 
 export type RosterContextType = {
     roster: Character[];
+    dispatch: React.Dispatch<RosterAction>;
 };
 
 interface Props {
@@ -19,12 +15,10 @@ interface Props {
 
 const defaultRoster: Character[] = [
     {
+        id: '1',
         name: 'Aelnara',
         ilvl: 1500,
-        class: {
-            name: 'Shadowhunter',
-            icon: class_shadowhunter,
-        },
+        class: 'Shadowhunter',
         progress: {
             argos: false,
             valtan: false,
@@ -33,12 +27,10 @@ const defaultRoster: Character[] = [
         },
     },
     {
+        id: '2',
         name: 'Alariah',
         ilvl: 1460,
-        class: {
-            name: 'Deathblade',
-            icon: class_deathblade,
-        },
+        class: 'Deathblade',
         progress: {
             argos: false,
             valtan: false,
@@ -47,12 +39,10 @@ const defaultRoster: Character[] = [
         },
     },
     {
+        id: '3',
         name: 'Alyressa',
         ilvl: 1460,
-        class: {
-            name: 'Reaper',
-            icon: class_reaper,
-        },
+        class: 'Reaper',
         progress: {
             argos: false,
             valtan: false,
@@ -61,12 +51,10 @@ const defaultRoster: Character[] = [
         },
     },
     {
+        id: '4',
         name: 'Adyriah',
         ilvl: 1460,
-        class: {
-            name: 'Sorceress',
-            icon: class_sorceress,
-        },
+        class: 'Sorceress',
         progress: {
             argos: false,
             valtan: false,
@@ -75,12 +63,10 @@ const defaultRoster: Character[] = [
         },
     },
     {
+        id: '5',
         name: 'Alaressa',
         ilvl: 1460,
-        class: {
-            name: 'Gunslinger',
-            icon: class_gunslinger,
-        },
+        class: 'Gunslinger',
         progress: {
             argos: false,
             valtan: false,
@@ -89,12 +75,10 @@ const defaultRoster: Character[] = [
         },
     },
     {
+        id: '6',
         name: 'Adyressa',
         ilvl: 1460,
-        class: {
-            name: 'Glaivier',
-            icon: class_glaivier,
-        },
+        class: 'Glaivier',
         progress: {
             argos: false,
             valtan: false,
@@ -105,7 +89,7 @@ const defaultRoster: Character[] = [
 ];
 
 export const RosterProvider: React.FC<Props> = ({ children }) => {
-    const [roster, setRoster] = useState<Character[]>(defaultRoster);
+    const [roster, dispatch] = useReducer(rosterReducer, defaultRoster);
 
-    return <RosterContext.Provider value={{ roster }}>{children}</RosterContext.Provider>;
+    return <RosterContext.Provider value={{ roster, dispatch }}>{children}</RosterContext.Provider>;
 };
