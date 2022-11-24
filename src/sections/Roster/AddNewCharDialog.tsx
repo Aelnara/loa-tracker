@@ -1,19 +1,21 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { css } from '@emotion/react';
+import { RosterContext, RosterContextType } from '../../contexts/RosterContext';
 import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import { names, ClassName } from '../../types/ClassName';
+import { v4 } from 'uuid';
 
 interface AddNewCharDialogProps {
-    addNewChar: (name: string, ilvl: number, className: ClassName) => void;
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddNewCharDialog: React.FC<AddNewCharDialogProps> = ({ addNewChar, isOpen, setIsOpen }) => {
+const AddNewCharDialog: React.FC<AddNewCharDialogProps> = ({ isOpen, setIsOpen }) => {
+    const { dispatch } = useContext(RosterContext) as RosterContextType;
     const [classValue, setClassValue] = useState<ClassName | null>(null);
     const [classInput, setClassInput] = useState('');
     const [nameInput, setNameInput] = useState('');
@@ -21,7 +23,10 @@ const AddNewCharDialog: React.FC<AddNewCharDialogProps> = ({ addNewChar, isOpen,
     const maxIlvl = 1640;
 
     const handleAddNewChar = () => {
-        if (classValue) addNewChar(nameInput, ilvlInput, classValue);
+        if (classValue) {
+            dispatch({ type: 'ADD_CHAR', payload: { id: v4(), name: nameInput, ilvl: ilvlInput, class: classValue, progress: { argos: false, valtan: false, vykas: false, kakul: false } } });
+            setIsOpen(false);
+        }
     };
 
     return (

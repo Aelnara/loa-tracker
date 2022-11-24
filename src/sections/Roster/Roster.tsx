@@ -4,19 +4,12 @@ import { css } from '@emotion/react';
 import { RosterContext, RosterContextType } from '../../contexts/RosterContext';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Colors from '../../constants/Colors';
-import { ClassName } from '../../types/ClassName';
 import getClassIcon from '../../utils/getClassIcon';
-import { v4 } from 'uuid';
 import AddNewCharDialog from './AddNewCharDialog';
 
 const Roster: React.FC = () => {
-    const { roster, dispatch } = useContext(RosterContext) as RosterContextType;
+    const { roster } = useContext(RosterContext) as RosterContextType;
     const [isAddingNewCharDialogOpen, setIsAddingNewCharDialogOpen] = useState(false);
-
-    const addNewChar = (name: string, ilvl: number, className: ClassName) => {
-        dispatch({ type: 'ADD_CHAR', payload: { id: v4(), name, ilvl, class: className, progress: { argos: false, valtan: false, vykas: false, kakul: false } } });
-        setIsAddingNewCharDialogOpen(false);
-    };
 
     return (
         <div css={containerStyles}>
@@ -34,7 +27,7 @@ const Roster: React.FC = () => {
                 ))}
             </div>
 
-            <AddNewCharDialog addNewChar={addNewChar} isOpen={isAddingNewCharDialogOpen} setIsOpen={setIsAddingNewCharDialogOpen} />
+            <AddNewCharDialog isOpen={isAddingNewCharDialogOpen} setIsOpen={setIsAddingNewCharDialogOpen} />
         </div>
     );
 };
