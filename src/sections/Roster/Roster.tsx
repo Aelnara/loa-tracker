@@ -3,21 +3,20 @@ import React, { useContext, useState } from 'react';
 import { css } from '@emotion/react';
 import { RosterContext, RosterContextType } from '../../contexts/RosterContext';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import Dialog from '@mui/material/Dialog';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import Button from '@mui/material/Button';
 import Colors from '../../constants/Colors';
-import { names, ClassName } from '../../types/Class';
+import { ClassName } from '../../types/ClassName';
+import getClassIcon from '../../utils/getClassIcon';
+import { v4 } from 'uuid';
+import AddNewCharDialog from './AddNewCharDialog';
 
 const Roster: React.FC = () => {
-    const { roster } = useContext(RosterContext) as RosterContextType;
+    const { roster, dispatch } = useContext(RosterContext) as RosterContextType;
     const [isAddingNewCharDialogOpen, setIsAddingNewCharDialogOpen] = useState(false);
-    const [classValue, setClassValue] = useState<ClassName | null>(null);
-    const [classInput, setClassInput] = useState('');
-    const [nameInput, setNameInput] = useState('');
-    const [ilvlInput, setIlvlInput] = useState(0);
-    const maxIlvl = 1640;
+
+    const addNewChar = (name: string, ilvl: number, className: ClassName) => {
+        dispatch({ type: 'ADD_CHAR', payload: { id: v4(), name, ilvl, class: className, progress: { argos: false, valtan: false, vykas: false, kakul: false } } });
+        setIsAddingNewCharDialogOpen(false);
+    };
 
     return (
         <div css={containerStyles}>
@@ -25,39 +24,17 @@ const Roster: React.FC = () => {
                 <div css={addCharCardStyles} onClick={() => setIsAddingNewCharDialogOpen(true)}>
                     <AddCircleOutlineIcon css={addIconStyles} />
                 </div>
-                {roster.map((character, idx) => (
-                    <div css={cardStyles} key={character.ilvl + idx}>
-                        <img src={character.class.icon} alt={character.class.name} />
-                        <p>({character.class.name})</p>
+                {roster.map((character) => (
+                    <div css={cardStyles} key={character.id}>
+                        <img src={getClassIcon(character.class)} alt={character.class} />
+                        <p>({character.class})</p>
                         <p css={classNameStyles}>{character.name}</p>
                         <p css={ilvlStyles}>{character.ilvl}</p>
                     </div>
                 ))}
             </div>
 
-            <Dialog PaperProps={{ style: { backgroundColor: 'black', borderRadius: 12, padding: 24, gap: 24 } }} onClose={() => setIsAddingNewCharDialogOpen(false)} open={isAddingNewCharDialogOpen}>
-                <p css={addCharLabel}>Add Character</p>
-                <TextField value={nameInput} inputProps={{ maxLength: 12 }} onChange={(event) => setNameInput(event.target.value)} label="Name" variant="outlined" />
-                <Autocomplete
-                    value={classValue}
-                    onChange={(event: any, newValue: ClassName | null) => setClassValue(newValue)}
-                    inputValue={classInput}
-                    onInputChange={(event, newInputValue) => setClassInput(newInputValue)}
-                    options={names}
-                    sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Class" />}
-                />
-                <TextField value={ilvlInput} onChange={(event) => setIlvlInput(Number(event.target.value) > maxIlvl ? maxIlvl : Number(event.target.value))} type="number" label="Item level" inputProps={{ min: 0, max: maxIlvl }} />
-
-                <div css={dialogButtonsContainerStyles}>
-                    <Button color="primary" variant="outlined" onClick={() => setIsAddingNewCharDialogOpen(false)}>
-                        Cancel
-                    </Button>
-                    <Button color="primary" variant="outlined">
-                        Add
-                    </Button>
-                </div>
-            </Dialog>
+            <AddNewCharDialog addNewChar={addNewChar} isOpen={isAddingNewCharDialogOpen} setIsOpen={setIsAddingNewCharDialogOpen} />
         </div>
     );
 };
@@ -121,21 +98,7 @@ const ilvlStyles = css`
     margin: 12px;
 `;
 
-const addCharLabel = css`
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    margin: 0;
-    margin-bottom: 12px;
-`;
-
 const addIconStyles = css`
     width: 70px;
     height: 70px;
-`;
-
-const dialogButtonsContainerStyles = css`
-    display: flex;
-    justify-content: end;
-    gap: 16px;
 `;
