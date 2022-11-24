@@ -6,10 +6,19 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Colors from '../../constants/Colors';
 import getClassIcon from '../../utils/getClassIcon';
 import AddNewCharDialog from './AddNewCharDialog';
+import UpdateCharDialog from './UpdateCharDialog';
+import { Character } from '../../types/Character';
 
 const Roster: React.FC = () => {
     const { roster } = useContext(RosterContext) as RosterContextType;
     const [isAddingNewCharDialogOpen, setIsAddingNewCharDialogOpen] = useState(false);
+    const [isUpdateCharDialogOpen, setIsUpdateCharDialogOpen] = useState(false);
+    const [updatingChar, setUpdatingChar] = useState<Character>();
+
+    const handleEdit = (character: Character) => {
+        setUpdatingChar(character);
+        setIsUpdateCharDialogOpen(true);
+    };
 
     return (
         <div css={containerStyles}>
@@ -18,7 +27,7 @@ const Roster: React.FC = () => {
                     <AddCircleOutlineIcon css={addIconStyles} />
                 </div>
                 {roster.map((character) => (
-                    <div css={cardStyles} key={character.id}>
+                    <div css={cardStyles} key={character.id} onClick={() => handleEdit(character)}>
                         <img src={getClassIcon(character.class)} alt={character.class} />
                         <p>({character.class})</p>
                         <p css={classNameStyles}>{character.name}</p>
@@ -28,6 +37,7 @@ const Roster: React.FC = () => {
             </div>
 
             <AddNewCharDialog isOpen={isAddingNewCharDialogOpen} setIsOpen={setIsAddingNewCharDialogOpen} />
+            {updatingChar && <UpdateCharDialog character={updatingChar} isOpen={isUpdateCharDialogOpen} setIsOpen={setIsUpdateCharDialogOpen} />}
         </div>
     );
 };
