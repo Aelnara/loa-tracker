@@ -27,6 +27,7 @@ const defaultRoster: Character[] = [
                 guild_contribution: false,
             },
             weekly: {
+                una: false,
                 argos: false,
                 valtan: false,
                 vykas: false,
@@ -47,6 +48,7 @@ const defaultRoster: Character[] = [
                 guild_contribution: false,
             },
             weekly: {
+                una: false,
                 argos: false,
                 valtan: false,
                 vykas: false,
@@ -67,6 +69,7 @@ const defaultRoster: Character[] = [
                 guild_contribution: false,
             },
             weekly: {
+                una: false,
                 argos: false,
                 valtan: false,
                 vykas: false,
@@ -87,6 +90,7 @@ const defaultRoster: Character[] = [
                 guild_contribution: false,
             },
             weekly: {
+                una: false,
                 argos: false,
                 valtan: false,
                 vykas: false,
@@ -107,6 +111,7 @@ const defaultRoster: Character[] = [
                 guild_contribution: false,
             },
             weekly: {
+                una: false,
                 argos: false,
                 valtan: false,
                 vykas: false,
@@ -127,6 +132,7 @@ const defaultRoster: Character[] = [
                 guild_contribution: false,
             },
             weekly: {
+                una: false,
                 argos: false,
                 valtan: false,
                 vykas: false,

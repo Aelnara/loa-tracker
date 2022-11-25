@@ -6,6 +6,7 @@ export type Progress = {
         guild_contribution: boolean;
     };
     weekly: {
+        una: boolean;
         argos: boolean;
         valtan: boolean;
         vykas: boolean;
