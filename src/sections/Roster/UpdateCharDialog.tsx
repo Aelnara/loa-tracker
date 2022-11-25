@@ -36,6 +36,11 @@ const UpdateCharDialog: React.FC<UpdateCharDialogProps> = ({ character, isOpen, 
         }
     };
 
+    const handleRemoveChar = () => {
+        dispatch({ type: 'REMOVE_CHAR', payload: character.id });
+        setIsOpen(false);
+    };
+
     return (
         <Dialog PaperProps={{ style: { backgroundColor: 'black', borderRadius: 12, padding: 24, gap: 24 } }} onClose={() => setIsOpen(false)} open={isOpen}>
             <p css={addCharLabel}>Update Character</p>
@@ -55,7 +60,7 @@ const UpdateCharDialog: React.FC<UpdateCharDialogProps> = ({ character, isOpen, 
                 <Button color="primary" variant="outlined" onClick={() => setIsOpen(false)}>
                     Cancel
                 </Button>
-                <Button color="primary" variant="outlined" onClick={() => dispatch({ type: 'REMOVE_CHAR', payload: character.id })}>
+                <Button color="primary" variant="outlined" onClick={handleRemoveChar}>
                     Remove
                 </Button>
                 <Button color="primary" variant="outlined" onClick={handleUpdateChar}>
