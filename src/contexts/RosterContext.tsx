@@ -20,10 +20,18 @@ const defaultRoster: Character[] = [
         ilvl: 1500,
         class: 'Shadowhunter',
         progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
+            daily: {
+                chaos_dungeon: false,
+                guardian_raid: false,
+                una: false,
+                guild_contribution: false,
+            },
+            weekly: {
+                argos: false,
+                valtan: false,
+                vykas: false,
+                kakul: false,
+            },
         },
     },
     {
@@ -32,10 +40,18 @@ const defaultRoster: Character[] = [
         ilvl: 1460,
         class: 'Deathblade',
         progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
+            daily: {
+                chaos_dungeon: false,
+                guardian_raid: false,
+                una: false,
+                guild_contribution: false,
+            },
+            weekly: {
+                argos: false,
+                valtan: false,
+                vykas: false,
+                kakul: false,
+            },
         },
     },
     {
@@ -44,10 +60,18 @@ const defaultRoster: Character[] = [
         ilvl: 1460,
         class: 'Reaper',
         progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
+            daily: {
+                chaos_dungeon: false,
+                guardian_raid: false,
+                una: false,
+                guild_contribution: false,
+            },
+            weekly: {
+                argos: false,
+                valtan: false,
+                vykas: false,
+                kakul: false,
+            },
         },
     },
     {
@@ -56,10 +80,18 @@ const defaultRoster: Character[] = [
         ilvl: 1460,
         class: 'Sorceress',
         progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
+            daily: {
+                chaos_dungeon: false,
+                guardian_raid: false,
+                una: false,
+                guild_contribution: false,
+            },
+            weekly: {
+                argos: false,
+                valtan: false,
+                vykas: false,
+                kakul: false,
+            },
         },
     },
     {
@@ -68,10 +100,18 @@ const defaultRoster: Character[] = [
         ilvl: 1460,
         class: 'Gunslinger',
         progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
+            daily: {
+                chaos_dungeon: false,
+                guardian_raid: false,
+                una: false,
+                guild_contribution: false,
+            },
+            weekly: {
+                argos: false,
+                valtan: false,
+                vykas: false,
+                kakul: false,
+            },
         },
     },
     {
@@ -80,10 +120,18 @@ const defaultRoster: Character[] = [
         ilvl: 1460,
         class: 'Glaivier',
         progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
+            daily: {
+                chaos_dungeon: false,
+                guardian_raid: false,
+                una: false,
+                guild_contribution: false,
+            },
+            weekly: {
+                argos: false,
+                valtan: false,
+                vykas: false,
+                kakul: false,
+            },
         },
     },
 ];

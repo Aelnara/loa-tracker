@@ -24,7 +24,16 @@ const AddNewCharDialog: React.FC<AddNewCharDialogProps> = ({ isOpen, setIsOpen }
 
     const handleAddNewChar = () => {
         if (classValue && nameInput !== '') {
-            dispatch({ type: 'ADD_CHAR', payload: { id: v4(), name: nameInput, ilvl: ilvlInput, class: classValue, progress: { argos: false, valtan: false, vykas: false, kakul: false } } });
+            dispatch({
+                type: 'ADD_CHAR',
+                payload: {
+                    id: v4(),
+                    name: nameInput,
+                    ilvl: ilvlInput,
+                    class: classValue,
+                    progress: { daily: { chaos_dungeon: false, guardian_raid: false, una: false, guild_contribution: false }, weekly: { argos: false, valtan: false, vykas: false, kakul: false } },
+                },
+            });
             setIsOpen(false);
 
             setClassValue(null);
