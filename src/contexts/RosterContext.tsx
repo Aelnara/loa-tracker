@@ -21,9 +21,9 @@ const defaultRoster: Character[] = [
         class: 'Shadowhunter',
         progress: {
             daily: {
+                una: false,
                 chaos_dungeon: false,
                 guardian_raid: false,
-                una: false,
                 guild_contribution: false,
             },
             weekly: {
@@ -41,9 +41,9 @@ const defaultRoster: Character[] = [
         class: 'Deathblade',
         progress: {
             daily: {
+                una: false,
                 chaos_dungeon: false,
                 guardian_raid: false,
-                una: false,
                 guild_contribution: false,
             },
             weekly: {
@@ -61,9 +61,9 @@ const defaultRoster: Character[] = [
         class: 'Reaper',
         progress: {
             daily: {
+                una: false,
                 chaos_dungeon: false,
                 guardian_raid: false,
-                una: false,
                 guild_contribution: false,
             },
             weekly: {
@@ -81,9 +81,9 @@ const defaultRoster: Character[] = [
         class: 'Sorceress',
         progress: {
             daily: {
+                una: false,
                 chaos_dungeon: false,
                 guardian_raid: false,
-                una: false,
                 guild_contribution: false,
             },
             weekly: {
@@ -101,9 +101,9 @@ const defaultRoster: Character[] = [
         class: 'Gunslinger',
         progress: {
             daily: {
+                una: false,
                 chaos_dungeon: false,
                 guardian_raid: false,
-                una: false,
                 guild_contribution: false,
             },
             weekly: {
@@ -121,9 +121,9 @@ const defaultRoster: Character[] = [
         class: 'Glaivier',
         progress: {
             daily: {
+                una: false,
                 chaos_dungeon: false,
                 guardian_raid: false,
-                una: false,
                 guild_contribution: false,
             },
             weekly: {
