@@ -36,4 +36,5 @@ export default App;
 
 const containerStyles = css`
     font-family: 'Roboto';
+    color: ${Colors.WHITE};
 `;
