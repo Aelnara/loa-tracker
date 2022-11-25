@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import { names, ClassName } from '../../types/ClassName';
-import { v4 } from 'uuid';
 import { Character } from '../../types/Character';
 
 interface UpdateCharDialogProps {
