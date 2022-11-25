@@ -50,8 +50,8 @@ const containerStyles = css`
     justify-content: center;
     align-items: start;
     gap: 16px;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    margin-top: 60px;
+    margin-bottom: 60px;
 `;
 
 const rosterListStyles = css`
