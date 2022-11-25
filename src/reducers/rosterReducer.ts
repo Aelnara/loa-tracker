@@ -15,7 +15,12 @@ type UpdateCharAction = {
     payload: Character;
 };
 
-export type RosterAction = AddCharAction | RemoveCharAction | UpdateCharAction;
+type ReorderRosterAction = {
+    type: 'REORDER_ROSTER';
+    payload: Character[];
+};
+
+export type RosterAction = AddCharAction | RemoveCharAction | UpdateCharAction | ReorderRosterAction;
 
 const rosterReducer = (state: Character[], action: RosterAction): Character[] => {
     switch (action.type) {
@@ -29,6 +34,8 @@ const rosterReducer = (state: Character[], action: RosterAction): Character[] =>
             updatedRoster.splice(idx, 1, action.payload);
 
             return updatedRoster;
+        case 'REORDER_ROSTER':
+            return action.payload;
         default:
             return state;
     }
