@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useContext } from 'react';
 import { css } from '@emotion/react';
+import { RosterContext, RosterContextType } from '../../contexts/RosterContext';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Character } from '../../types/Character';
@@ -13,8 +14,14 @@ interface CharacterProgressProps {
 }
 
 const CharacterProgress: React.FC<CharacterProgressProps> = ({ character }) => {
+    const { dispatch } = useContext(RosterContext) as RosterContextType;
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: character.id });
     const style = { transform: CSS.Transform.toString(transform), transition };
+
+    const handleProgressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const updatedProgress = { ...character.progress, [event.target.name]: event.target.checked };
+        dispatch({ type: 'UPDATE_PROGRESS', payload: { id: character.id, progress: updatedProgress } });
+    };
 
     return (
         <div css={containerStyles} style={style} ref={setNodeRef} {...attributes} {...listeners}>
@@ -28,17 +35,17 @@ const CharacterProgress: React.FC<CharacterProgressProps> = ({ character }) => {
 
             <div css={tasksContainerStyles}>
                 <div css={rowsContainerStyles}>
-                    <Checkbox checked={character.progress.daily.una} />
-                    <Checkbox checked={character.progress.daily.chaos_dungeon} />
-                    <Checkbox checked={character.progress.daily.guardian_raid} />
-                    <Checkbox checked={character.progress.daily.guild_contribution} />
+                    <Checkbox name="daily_una" checked={character.progress.daily_una} onChange={handleProgressChange} />
+                    <Checkbox name="chaos_dungeon" checked={character.progress.chaos_dungeon} onChange={handleProgressChange} />
+                    <Checkbox name="guardian_raid" checked={character.progress.guardian_raid} onChange={handleProgressChange} />
+                    <Checkbox name="guild_contribution" checked={character.progress.guild_contribution} onChange={handleProgressChange} />
                 </div>
                 <div css={rowsContainerStyles}>
-                    <Checkbox checked={character.progress.weekly.una} />
-                    <Checkbox checked={character.progress.weekly.argos} />
-                    <Checkbox checked={character.progress.weekly.valtan} />
-                    <Checkbox checked={character.progress.weekly.vykas} />
-                    <Checkbox checked={character.progress.weekly.kakul} />
+                    <Checkbox name="weekly_una" checked={character.progress.weekly_una} onChange={handleProgressChange} />
+                    <Checkbox name="argos" checked={character.progress.argos} onChange={handleProgressChange} />
+                    <Checkbox name="valtan" checked={character.progress.valtan} onChange={handleProgressChange} />
+                    <Checkbox name="vykas" checked={character.progress.vykas} onChange={handleProgressChange} />
+                    <Checkbox name="kakul" checked={character.progress.kakul} onChange={handleProgressChange} />
                 </div>
             </div>
         </div>
@@ -63,7 +70,7 @@ const headerStyles = css`
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    cursor: pointer;
+    cursor: grab;
 `;
 
 const classIconStyles = css`
