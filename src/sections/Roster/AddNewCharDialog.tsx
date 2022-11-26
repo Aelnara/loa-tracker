@@ -31,7 +31,7 @@ const AddNewCharDialog: React.FC<AddNewCharDialogProps> = ({ isOpen, setIsOpen }
                     name: nameInput,
                     ilvl: ilvlInput,
                     class: classValue,
-                    progress: { daily: { una: false, chaos_dungeon: false, guardian_raid: false, guild_contribution: false }, weekly: { una: false, argos: false, valtan: false, vykas: false, kakul: false } },
+                    progress: { daily_una: false, chaos_dungeon: false, guardian_raid: false, guild_contribution: false, weekly_una: false, argos: false, valtan: false, vykas: false, kakul: false },
                 },
             });
             setIsOpen(false);
