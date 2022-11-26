@@ -11,6 +11,7 @@ import daily_una from '../../assets/icons/progression/daily_una.png';
 import daily_chaos from '../../assets/icons/progression/daily_chaos.png';
 import daily_guardian from '../../assets/icons/progression/daily_guardian.png';
 import daily_sylmael from '../../assets/icons/progression/daily_sylmael.png';
+import weekly_una from '../../assets/icons/progression/weekly_una.png';
 import weekly_abyssal_raid from '../../assets/icons/progression/weekly_abyssal_raid.png';
 import weekly_legion_raid from '../../assets/icons/progression/weekly_legion_raid.png';
 
@@ -50,7 +51,7 @@ const Progress: React.FC = () => {
                 </div>
 
                 <div css={taskContainerStyles}>
-                    <img css={taskIconStyles} src={daily_una} alt="task-icon" />
+                    <img css={taskIconStyles} src={weekly_una} alt="task-icon" />
                     <p css={taskLabelStyles}>Una (Weekly)</p>
                 </div>
                 <div css={taskContainerStyles}>
