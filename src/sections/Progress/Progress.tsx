@@ -105,6 +105,7 @@ const taskContainerStyles = css`
     height: 42px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 `;
 
 const taskIconStyles = css`
