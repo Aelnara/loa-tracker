@@ -40,22 +40,34 @@ const rosterReducer = (state: Character[], action: RosterAction): Character[] =>
         return [...updatedRoster];
     };
 
+    const saveToStorage = (roster: Character[]) => {
+        localStorage.setItem('loa-tracker-progress', JSON.stringify(roster));
+    };
+
     switch (action.type) {
         case 'ADD_CHAR':
-            return [...state, action.payload];
+            const rosterWithAddedChar = [...state, action.payload];
+            saveToStorage(rosterWithAddedChar);
+            return rosterWithAddedChar;
         case 'REMOVE_CHAR':
-            return state.filter((char) => char.id !== action.payload);
+            const rosterWithRemovedChar = state.filter((char) => char.id !== action.payload);
+            saveToStorage(rosterWithRemovedChar);
+            return rosterWithRemovedChar;
         case 'UPDATE_CHAR':
-            return updateCharacter(action.payload.id, action.payload);
+            const rosterWithUpdatedChar = updateCharacter(action.payload.id, action.payload);
+            saveToStorage(rosterWithUpdatedChar);
+            return rosterWithUpdatedChar;
         case 'REORDER_ROSTER':
+            saveToStorage(action.payload);
             return action.payload;
         case 'UPDATE_PROGRESS':
-            let updatedProgressRoster = state;
+            let rosterWithUpdatedProgress = state;
             const charToUpdate = state.find((char) => char.id === action.payload.id);
-            if (charToUpdate) updatedProgressRoster = updateCharacter(action.payload.id, { ...charToUpdate, progress: { ...charToUpdate.progress, ...action.payload.progress } });
-
-            return updatedProgressRoster;
+            if (charToUpdate) rosterWithUpdatedProgress = updateCharacter(action.payload.id, { ...charToUpdate, progress: { ...charToUpdate.progress, ...action.payload.progress } });
+            saveToStorage(rosterWithUpdatedProgress);
+            return rosterWithUpdatedProgress;
         default:
+            saveToStorage(state);
             return state;
     }
 };
