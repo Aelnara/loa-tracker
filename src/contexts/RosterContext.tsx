@@ -125,7 +125,9 @@ const defaultRoster: Character[] = [
 ];
 
 export const RosterProvider: React.FC<Props> = ({ children }) => {
-    const [roster, dispatch] = useReducer(rosterReducer, defaultRoster);
+    const rosterFromStorage = localStorage.getItem('loa-tracker-progress');
+    const initialRoster = rosterFromStorage ? JSON.parse(rosterFromStorage) : defaultRoster;
+    const [roster, dispatch] = useReducer(rosterReducer, initialRoster);
 
     return <RosterContext.Provider value={{ roster, dispatch }}>{children}</RosterContext.Provider>;
 };
