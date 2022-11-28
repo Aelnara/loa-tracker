@@ -41,6 +41,9 @@ const Progress: React.FC = () => {
                     <Button size="large" onClick={() => dispatch({ type: 'RESET_PROGRESS', payload: 'weekly' })}>
                         Reset Weekly
                     </Button>
+                    <Button size="large" onClick={() => dispatch({ type: 'RESET_PROGRESS', payload: 'full' })}>
+                        Reset All
+                    </Button>
                 </div>
 
                 <div css={separatorStyles} />
@@ -114,7 +117,7 @@ const tasksContainerStyles = css`
 `;
 
 const resetButtonsContainerStyles = css`
-    height: 110px;
+    height: 131.66px;
     display: flex;
     flex-direction: column;
     justify-content: center;
