@@ -14,6 +14,7 @@ import daily_sylmael from '../../assets/icons/progression/daily_sylmael.png';
 import weekly_una from '../../assets/icons/progression/weekly_una.png';
 import weekly_abyssal_raid from '../../assets/icons/progression/weekly_abyssal_raid.png';
 import weekly_legion_raid from '../../assets/icons/progression/weekly_legion_raid.png';
+import { Button } from '@mui/material';
 
 const Progress: React.FC = () => {
     const { roster, dispatch } = useContext(RosterContext) as RosterContextType;
@@ -33,6 +34,17 @@ const Progress: React.FC = () => {
     return (
         <div css={containerStyles}>
             <div css={tasksContainerStyles}>
+                <div css={resetButtonsContainerStyles}>
+                    <Button size="large" onClick={() => dispatch({ type: 'RESET_PROGRESS', payload: 'daily' })}>
+                        Reset Daily
+                    </Button>
+                    <Button size="large" onClick={() => dispatch({ type: 'RESET_PROGRESS', payload: 'weekly' })}>
+                        Reset Weekly
+                    </Button>
+                </div>
+
+                <div css={separatorStyles} />
+
                 <div css={taskContainerStyles}>
                     <img css={taskIconStyles} src={daily_una} alt="task-icon" />
                     <p css={taskLabelStyles}>Una (Daily)</p>
@@ -98,7 +110,24 @@ const tasksContainerStyles = css`
     flex-direction: column;
     background-color: ${Colors.GRAY_LIGHT};
     padding: 12px;
-    margin-top: 138px;
+    // margin-top: 138px;
+`;
+
+const resetButtonsContainerStyles = css`
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 16px;
+    box-sizing: border-box;
+`;
+
+const separatorStyles = css`
+    width: 100%;
+    height: 2px;
+    background-color: ${Colors.GRAY_DARK};
+    margin-top: 16px;
+    margin-bottom: 10px;
 `;
 
 const taskContainerStyles = css`
