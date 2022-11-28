@@ -28,9 +28,9 @@ const Roster: React.FC = () => {
                 </div>
                 {roster.map((character) => (
                     <div css={cardStyles} key={character.id} onClick={() => handleEdit(character)}>
-                        <img src={getClassIcon(character.class)} alt={character.class} />
-                        <p>({character.class})</p>
-                        <p css={classNameStyles}>{character.name}</p>
+                        <img css={classIconStyles} src={getClassIcon(character.class)} alt={character.class} />
+                        <p css={classNameStyles}>({character.class})</p>
+                        <p css={nameStyles}>{character.name}</p>
                         <p css={ilvlStyles}>{character.ilvl}</p>
                     </div>
                 ))}
@@ -81,24 +81,37 @@ const cardStyles = css`
     }
 `;
 
+const classIconStyles = css`
+    width: 70px;
+    height: 63.94px;
+`;
+
 const addCharCardStyles = css`
     ${cardStyles}
+    height: 179.94px;
     justify-content: center;
     align-self: stretch;
 `;
 
 const classNameStyles = css`
-    font-size: 32px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 8px;
+`;
+
+const nameStyles = css`
+    font-size: 24px;
     font-weight: 600;
     letter-spacing: 1.5px;
     margin: 0;
 `;
 
 const ilvlStyles = css`
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 500;
-    letter-spacing: 2px;
-    margin: 12px;
+    letter-spacing: 1px;
+    margin: 8px;
 `;
 
 const addIconStyles = css`
