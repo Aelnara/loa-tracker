@@ -50,10 +50,10 @@ const CharacterProgress: React.FC<CharacterProgressProps> = ({ character }) => {
                 </div>
                 <div css={rowsContainerStyles}>
                     <Checkbox name="weekly_una" checked={character.progress.weekly_una} onChange={handleProgressChange} />
-                    <Checkbox name="argos" checked={character.progress.argos} onChange={handleProgressChange} />
-                    <Checkbox name="valtan" checked={character.progress.valtan} onChange={handleProgressChange} />
-                    <Checkbox name="vykas" checked={character.progress.vykas} onChange={handleProgressChange} />
-                    <Checkbox name="kakul" checked={character.progress.kakul} onChange={handleProgressChange} />
+                    <Checkbox name="argos" checked={character.progress.argos} onChange={handleProgressChange} disabled={character.ilvl < 1370} />
+                    <Checkbox name="valtan" checked={character.progress.valtan} onChange={handleProgressChange} disabled={character.ilvl < 1415} />
+                    <Checkbox name="vykas" checked={character.progress.vykas} onChange={handleProgressChange} disabled={character.ilvl < 1430} />
+                    <Checkbox name="kakul" checked={character.progress.kakul} onChange={handleProgressChange} disabled={character.ilvl < 1475} />
                 </div>
             </div>
         </div>
@@ -81,14 +81,12 @@ const headerStyles = css`
 `;
 
 const classIconStyles = css`
-    // width: 40px;
-    // height: 36.54px;
     width: 50px;
     height: 45.67px;
 `;
 
 const nameStyles = css`
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     letter-spacing: 0.5px;
     width: 100%;
@@ -145,4 +143,5 @@ const tasksContainerStyles = css`
 const rowsContainerStyles = css`
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
