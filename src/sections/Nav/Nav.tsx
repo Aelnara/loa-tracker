@@ -3,18 +3,25 @@ import React, { useContext } from 'react';
 import { css } from '@emotion/react';
 import { NavContext, NavContextType } from '../../contexts/NavContext';
 import Colors from '../../constants/Colors';
+import DayProgression from './DayProgression';
+import GoldProgression from './GoldProgression';
 
 const Nav: React.FC = () => {
     const { navState, changeNavState } = useContext(NavContext) as NavContextType;
 
     return (
         <div css={containerStyles}>
-            <div css={linkStyles(navState === 'progress')} onClick={() => changeNavState('progress')}>
-                <p css={linkTextStyles}>Progress</p>
+            <DayProgression />
+            <div css={linksContainerStyles}>
+                <div css={linkStyles(navState === 'progress')} onClick={() => changeNavState('progress')}>
+                    <p css={linkTextStyles}>Progress</p>
+                </div>
+                <div css={linkStyles(navState === 'roster')} onClick={() => changeNavState('roster')}>
+                    <p css={linkTextStyles}>Roster</p>
+                </div>
             </div>
-            <div css={linkStyles(navState === 'roster')} onClick={() => changeNavState('roster')}>
-                <p css={linkTextStyles}>Roster</p>
-            </div>
+
+            <GoldProgression />
         </div>
     );
 };
@@ -24,10 +31,19 @@ const containerStyles = css`
     height: 60px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 32px;
+    gap: 48px;
+    filter: drop-shadow(0px 1px 2px #000);
+`;
+const linksContainerStyles = css`
+    display: flex;
+    height: 60px;
     justify-content: center;
     align-items: center;
     gap: 48px;
-    filter: drop-shadow(0px 1px 2px #000);
 `;
 
 const linkStyles = (active: boolean) => css`
