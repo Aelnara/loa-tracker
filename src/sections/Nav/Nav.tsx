@@ -12,6 +12,7 @@ const Nav: React.FC = () => {
     return (
         <div css={containerStyles}>
             <DayProgression />
+
             <div css={linksContainerStyles}>
                 <div css={linkStyles(navState === 'progress')} onClick={() => changeNavState('progress')}>
                     <p css={linkTextStyles}>Progress</p>
