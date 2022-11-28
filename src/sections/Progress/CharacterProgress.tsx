@@ -8,6 +8,8 @@ import { Character } from '../../types/Character';
 import Colors from '../../constants/Colors';
 import getClassIcon from '../../utils/getClassIcon';
 import Checkbox from '@mui/material/Checkbox';
+import { getGoldForChar, getPossibleRawGoldForChar } from '../../utils/goldProgression';
+import gold from '../../assets/icons/gold.png';
 
 interface CharacterProgressProps {
     character: Character;
@@ -29,6 +31,12 @@ const CharacterProgress: React.FC<CharacterProgressProps> = ({ character }) => {
                 <img css={classIconStyles} src={getClassIcon(character.class)} alt={character.class} />
                 <p css={nameStyles}>{character.name}</p>
                 <p css={ilvlStyles}>({character.ilvl})</p>
+                <div css={goldProgContainerStyles}>
+                    <p css={goldLabelStyles}>
+                        {getGoldForChar(character).toLocaleString()} / {getPossibleRawGoldForChar(character).toLocaleString()}
+                    </p>
+                    <img css={goldLogoStyles} src={gold} alt="gold" />
+                </div>
             </div>
 
             <div css={separatorStyles} />
@@ -65,7 +73,6 @@ const containerStyles = css`
 
 const headerStyles = css`
     width: 100%;
-    height: 110px;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -87,7 +94,7 @@ const nameStyles = css`
     width: 100%;
     text-align: center;
     margin: 0;
-    margin-top: 12px;
+    margin-top: 4px;
 `;
 
 const ilvlStyles = css`
@@ -97,6 +104,28 @@ const ilvlStyles = css`
     text-align: center;
     margin: 0;
     margin-top: 4px;
+`;
+
+const goldProgContainerStyles = css`
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+`;
+
+const goldLabelStyles = css`
+    font-size: 14px;
+    letter-spacing: 1px;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    margin-top: 3px;
+    color: ${Colors.GOLD};
+`;
+
+const goldLogoStyles = css`
+    width: 22px;
+    height: 22px;
+    margin-left: 8px;
 `;
 
 const separatorStyles = css`
