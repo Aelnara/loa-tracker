@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { css } from '@emotion/react';
 import Colors from '../../constants/Colors';
 import { RosterContext, RosterContextType } from '../../contexts/RosterContext';
@@ -15,9 +15,13 @@ import weekly_una from '../../assets/icons/progression/weekly_una.png';
 import weekly_abyssal_raid from '../../assets/icons/progression/weekly_abyssal_raid.png';
 import weekly_legion_raid from '../../assets/icons/progression/weekly_legion_raid.png';
 import { Button } from '@mui/material';
+import UpdateCharDialog from '../Roster/UpdateCharDialog';
+import { Character } from '../../types/Character';
 
 const Progress: React.FC = () => {
     const { roster, dispatch } = useContext(RosterContext) as RosterContextType;
+    const [isUpdateCharDialogOpen, setIsUpdateCharDialogOpen] = useState(false);
+    const [updatingChar, setUpdatingChar] = useState<Character>();
     const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 10 } }), useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }));
 
     function handleDragEnd(event: DragEndEvent) {
@@ -30,6 +34,11 @@ const Progress: React.FC = () => {
             dispatch({ type: 'REORDER_ROSTER', payload: newOrder });
         }
     }
+
+    const handleEdit = (character: Character) => {
+        setUpdatingChar(character);
+        setIsUpdateCharDialogOpen(true);
+    };
 
     return (
         <div css={containerStyles}>
@@ -90,10 +99,12 @@ const Progress: React.FC = () => {
             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} modifiers={[restrictToHorizontalAxis, restrictToParentElement]}>
                 <SortableContext items={roster} strategy={horizontalListSortingStrategy}>
                     {roster.map((character) => (
-                        <CharacterProgress key={character.id} character={character} />
+                        <CharacterProgress key={character.id} character={character} handleEdit={handleEdit} />
                     ))}
                 </SortableContext>
             </DndContext>
+
+            {updatingChar && <UpdateCharDialog character={updatingChar} isOpen={isUpdateCharDialogOpen} setIsOpen={setIsUpdateCharDialogOpen} />}
         </div>
     );
 };
