@@ -4,16 +4,31 @@ import { css } from '@emotion/react';
 import { RosterContext, RosterContextType } from '../../contexts/RosterContext';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Colors from '../../constants/Colors';
-import getClassIcon from '../../utils/getClassIcon';
 import AddNewCharDialog from './AddNewCharDialog';
 import UpdateCharDialog from './UpdateCharDialog';
 import { Character } from '../../types/Character';
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates, rectSortingStrategy } from '@dnd-kit/sortable';
+import { restrictToParentElement } from '@dnd-kit/modifiers';
+import CharacterCard from './CharacterCard';
 
 const Roster: React.FC = () => {
-    const { roster } = useContext(RosterContext) as RosterContextType;
+    const { roster, dispatch } = useContext(RosterContext) as RosterContextType;
     const [isAddingNewCharDialogOpen, setIsAddingNewCharDialogOpen] = useState(false);
     const [isUpdateCharDialogOpen, setIsUpdateCharDialogOpen] = useState(false);
     const [updatingChar, setUpdatingChar] = useState<Character>();
+    const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 10 } }), useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }));
+
+    function handleDragEnd(event: DragEndEvent) {
+        const { active, over } = event;
+
+        if (over && active.id !== over.id) {
+            const oldIndex = roster.findIndex((char) => char.id === active.id);
+            const newIndex = roster.findIndex((char) => char.id === over.id);
+            const newOrder = arrayMove(roster, oldIndex, newIndex);
+            dispatch({ type: 'REORDER_ROSTER', payload: newOrder });
+        }
+    }
 
     const handleEdit = (character: Character) => {
         setUpdatingChar(character);
@@ -26,14 +41,13 @@ const Roster: React.FC = () => {
                 <div css={addCharCardStyles} onClick={() => setIsAddingNewCharDialogOpen(true)}>
                     <AddCircleOutlineIcon css={addIconStyles} />
                 </div>
-                {roster.map((character) => (
-                    <div css={cardStyles} key={character.id} onClick={() => handleEdit(character)}>
-                        <img css={classIconStyles} src={getClassIcon(character.class)} alt={character.class} />
-                        <p css={classNameStyles}>({character.class})</p>
-                        <p css={nameStyles}>{character.name}</p>
-                        <p css={ilvlStyles}>{character.ilvl}</p>
-                    </div>
-                ))}
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} modifiers={[restrictToParentElement]}>
+                    <SortableContext items={roster} strategy={rectSortingStrategy}>
+                        {roster.map((character) => (
+                            <CharacterCard character={character} handleEdit={handleEdit} key={character.id} />
+                        ))}
+                    </SortableContext>
+                </DndContext>
             </div>
 
             <AddNewCharDialog isOpen={isAddingNewCharDialogOpen} setIsOpen={setIsAddingNewCharDialogOpen} />
@@ -81,37 +95,11 @@ const cardStyles = css`
     }
 `;
 
-const classIconStyles = css`
-    width: 70px;
-    height: 63.94px;
-`;
-
 const addCharCardStyles = css`
     ${cardStyles}
     height: 179.94px;
     justify-content: center;
     align-self: stretch;
-`;
-
-const classNameStyles = css`
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin: 8px;
-`;
-
-const nameStyles = css`
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    margin: 0;
-`;
-
-const ilvlStyles = css`
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin: 8px;
 `;
 
 const addIconStyles = css`
