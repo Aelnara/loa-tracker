@@ -5,7 +5,7 @@ import Colors from '../../constants/Colors';
 import { RosterContext, RosterContextType } from '../../contexts/RosterContext';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, horizontalListSortingStrategy } from '@dnd-kit/sortable';
-import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
+import { restrictToHorizontalAxis, restrictToParentElement } from '@dnd-kit/modifiers';
 import CharacterProgress from './CharacterProgress';
 import daily_una from '../../assets/icons/progression/daily_una.png';
 import daily_chaos from '../../assets/icons/progression/daily_chaos.png';
@@ -87,7 +87,7 @@ const Progress: React.FC = () => {
                 </div>
             </div>
 
-            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} modifiers={[restrictToHorizontalAxis]}>
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} modifiers={[restrictToHorizontalAxis, restrictToParentElement]}>
                 <SortableContext items={roster} strategy={horizontalListSortingStrategy}>
                     {roster.map((character) => (
                         <CharacterProgress key={character.id} character={character} />
