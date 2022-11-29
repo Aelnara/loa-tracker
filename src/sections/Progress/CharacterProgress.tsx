@@ -10,12 +10,14 @@ import getClassIcon from '../../utils/getClassIcon';
 import Checkbox from '@mui/material/Checkbox';
 import { getGoldForChar, getPossibleRawGoldForChar } from '../../utils/goldProgression';
 import gold from '../../assets/icons/gold.png';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface CharacterProgressProps {
     character: Character;
+    handleEdit: (character: Character) => void;
 }
 
-const CharacterProgress: React.FC<CharacterProgressProps> = ({ character }) => {
+const CharacterProgress: React.FC<CharacterProgressProps> = ({ character, handleEdit }) => {
     const { dispatch } = useContext(RosterContext) as RosterContextType;
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: character.id });
     const style = { transform: CSS.Transform.toString(transform), transition };
@@ -28,6 +30,9 @@ const CharacterProgress: React.FC<CharacterProgressProps> = ({ character }) => {
     return (
         <div css={containerStyles} style={style} ref={setNodeRef} {...attributes} {...listeners}>
             <div css={headerStyles}>
+                <div css={updateCharContainerStyles} onClick={() => handleEdit(character)}>
+                    <SettingsIcon css={updateCharIconStyles} />
+                </div>
                 <img css={classIconStyles} src={getClassIcon(character.class)} alt={character.class} />
                 <p css={nameStyles}>{character.name}</p>
                 <p css={ilvlStyles}>({character.ilvl})</p>
@@ -78,6 +83,24 @@ const headerStyles = css`
     justify-content: start;
     align-items: center;
     cursor: grab;
+    position: relative;
+`;
+
+const updateCharContainerStyles = css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+`;
+
+const updateCharIconStyles = css`
+    width: 20px;
+    height: 20px;
+    transition: all 0.1s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 `;
 
 const classIconStyles = css`
