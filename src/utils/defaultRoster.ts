@@ -6,6 +6,7 @@ const defaultRoster: Character[] = [
         name: 'Aelnara',
         ilvl: 1500,
         class: 'Shadowhunter',
+        gold_earning: true,
         progress: {
             daily_una: false,
             chaos_dungeon: false,
@@ -24,6 +25,7 @@ const defaultRoster: Character[] = [
         name: 'Alariah',
         ilvl: 1460,
         class: 'Deathblade',
+        gold_earning: true,
         progress: {
             daily_una: false,
             chaos_dungeon: false,
@@ -42,6 +44,7 @@ const defaultRoster: Character[] = [
         name: 'Alyressa',
         ilvl: 1460,
         class: 'Reaper',
+        gold_earning: true,
         progress: {
             daily_una: false,
             chaos_dungeon: false,
@@ -60,6 +63,7 @@ const defaultRoster: Character[] = [
         name: 'Adyriah',
         ilvl: 1460,
         class: 'Sorceress',
+        gold_earning: true,
         progress: {
             daily_una: false,
             chaos_dungeon: false,
@@ -78,6 +82,7 @@ const defaultRoster: Character[] = [
         name: 'Alaressa',
         ilvl: 1460,
         class: 'Gunslinger',
+        gold_earning: true,
         progress: {
             daily_una: false,
             chaos_dungeon: false,
@@ -96,6 +101,7 @@ const defaultRoster: Character[] = [
         name: 'Adyressa',
         ilvl: 1460,
         class: 'Glaivier',
+        gold_earning: true,
         progress: {
             daily_una: false,
             chaos_dungeon: false,
