@@ -96,13 +96,15 @@ const Progress: React.FC = () => {
                 </div>
             </div>
 
-            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} modifiers={[restrictToHorizontalAxis, restrictToParentElement]}>
-                <SortableContext items={roster} strategy={horizontalListSortingStrategy}>
-                    {roster.map((character) => (
-                        <CharacterProgress key={character.id} character={character} handleEdit={handleEdit} />
-                    ))}
-                </SortableContext>
-            </DndContext>
+            <div css={charProgContainerStyles}>
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} modifiers={[restrictToHorizontalAxis, restrictToParentElement]}>
+                    <SortableContext items={roster} strategy={horizontalListSortingStrategy}>
+                        {roster.map((character) => (
+                            <CharacterProgress key={character.id} character={character} handleEdit={handleEdit} />
+                        ))}
+                    </SortableContext>
+                </DndContext>
+            </div>
 
             {updatingChar && <UpdateCharDialog character={updatingChar} isOpen={isUpdateCharDialogOpen} setIsOpen={setIsUpdateCharDialogOpen} />}
         </div>
@@ -120,11 +122,18 @@ const containerStyles = css`
 `;
 
 const tasksContainerStyles = css`
+    min-width: 200px;
     display: flex;
     flex-direction: column;
     background-color: ${Colors.GRAY_LIGHT};
     padding: 12px;
     // margin-top: 138px;
+`;
+
+const charProgContainerStyles = css`
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
 `;
 
 const resetButtonsContainerStyles = css`
