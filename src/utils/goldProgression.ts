@@ -14,7 +14,8 @@ export const getPossibleRawGoldForChar = (char: Character): number => {
 
 export const getPossibleRawGoldForRoster = (roster: Character[]): number => {
     let possibleRawGold = 0;
-    roster.map((char) => (possibleRawGold = possibleRawGold + getPossibleRawGoldForChar(char)));
+    const goldEarningChars = roster.filter((char) => char.gold_earning);
+    goldEarningChars.map((char) => (possibleRawGold = possibleRawGold + getPossibleRawGoldForChar(char)));
 
     return possibleRawGold;
 };
@@ -65,7 +66,8 @@ export const getGoldForChar = (char: Character): number => {
 
 export const getGoldForRoster = (roster: Character[]): number => {
     let gold = 0;
-    roster.map((char) => (gold = gold + getGoldForChar(char)));
+    const goldEarningChars = roster.filter((char) => char.gold_earning);
+    goldEarningChars.map((char) => (gold = gold + getGoldForChar(char)));
 
     return gold;
 };
