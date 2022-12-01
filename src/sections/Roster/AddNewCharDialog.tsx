@@ -15,7 +15,7 @@ interface AddNewCharDialogProps {
 }
 
 const AddNewCharDialog: React.FC<AddNewCharDialogProps> = ({ isOpen, setIsOpen }) => {
-    const { dispatch } = useContext(RosterContext) as RosterContextType;
+    const { roster, dispatch } = useContext(RosterContext) as RosterContextType;
     const [classValue, setClassValue] = useState<ClassName | null>(null);
     const [classInput, setClassInput] = useState('');
     const [nameInput, setNameInput] = useState('');
@@ -23,7 +23,7 @@ const AddNewCharDialog: React.FC<AddNewCharDialogProps> = ({ isOpen, setIsOpen }
     const maxIlvl = 1640;
 
     const handleAddNewChar = () => {
-        if (classValue && nameInput !== '') {
+        if (roster.length < 16 && classValue && nameInput !== '') {
             dispatch({
                 type: 'ADD_CHAR',
                 payload: {
