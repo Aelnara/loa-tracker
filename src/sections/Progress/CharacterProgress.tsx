@@ -68,7 +68,7 @@ const CharacterProgress: React.FC<CharacterProgressProps> = ({ character, handle
 export default CharacterProgress;
 
 const containerStyles = css`
-    width: 180px;
+    min-width: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
