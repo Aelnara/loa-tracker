@@ -37,9 +37,7 @@ const CharacterProgress: React.FC<CharacterProgressProps> = ({ character, handle
                 <p css={nameStyles}>{character.name}</p>
                 <p css={ilvlStyles}>({character.ilvl})</p>
                 <div css={goldProgContainerStyles}>
-                    <p css={goldLabelStyles}>
-                        {getGoldForChar(character).toLocaleString()} / {getPossibleRawGoldForChar(character).toLocaleString()}
-                    </p>
+                    <p css={goldLabelStyles}>{character.gold_earning ? `${getGoldForChar(character).toLocaleString()} / ${getPossibleRawGoldForChar(character).toLocaleString()}` : 'Cant earn gold'}</p>
                     <img css={goldLogoStyles} src={gold} alt="gold" />
                 </div>
             </div>
