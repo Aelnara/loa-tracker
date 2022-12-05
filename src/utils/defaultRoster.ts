@@ -43,7 +43,7 @@ const defaultRoster: Character[] = [
     {
         id: v4(),
         name: 'Character 3',
-        ilvl: 1445,
+        ilvl: 1415,
         class: 'Reaper',
         gold_earning: true,
         progress: {
