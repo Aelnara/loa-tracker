@@ -20,8 +20,10 @@ const GoldProgression: React.FC = () => {
 };
 
 const containerStyles = css`
+    width: 230px;
     display: flex;
     align-items: center;
+    justify-content: end;
 `;
 
 const goldLabelStyles = css`
