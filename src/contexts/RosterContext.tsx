@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import { Character } from '../types/Character';
 import rosterReducer, { RosterAction } from '../reducers/rosterReducer';
+import defaultRoster from '../utils/defaultRoster';
 
 export const RosterContext = createContext<RosterContextType | null>(null);
 
@@ -13,83 +14,10 @@ interface Props {
     children: React.ReactNode;
 }
 
-const defaultRoster: Character[] = [
-    {
-        id: '1',
-        name: 'Aelnara',
-        ilvl: 1500,
-        class: 'Shadowhunter',
-        progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
-        },
-    },
-    {
-        id: '2',
-        name: 'Alariah',
-        ilvl: 1460,
-        class: 'Deathblade',
-        progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
-        },
-    },
-    {
-        id: '3',
-        name: 'Alyressa',
-        ilvl: 1460,
-        class: 'Reaper',
-        progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
-        },
-    },
-    {
-        id: '4',
-        name: 'Adyriah',
-        ilvl: 1460,
-        class: 'Sorceress',
-        progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
-        },
-    },
-    {
-        id: '5',
-        name: 'Alaressa',
-        ilvl: 1460,
-        class: 'Gunslinger',
-        progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
-        },
-    },
-    {
-        id: '6',
-        name: 'Adyressa',
-        ilvl: 1460,
-        class: 'Glaivier',
-        progress: {
-            argos: false,
-            valtan: false,
-            vykas: false,
-            kakul: false,
-        },
-    },
-];
-
 export const RosterProvider: React.FC<Props> = ({ children }) => {
-    const [roster, dispatch] = useReducer(rosterReducer, defaultRoster);
+    const rosterFromStorage = localStorage.getItem('loa-tracker-progress');
+    const initialRoster = rosterFromStorage ? JSON.parse(rosterFromStorage) : defaultRoster;
+    const [roster, dispatch] = useReducer(rosterReducer, initialRoster);
 
     return <RosterContext.Provider value={{ roster, dispatch }}>{children}</RosterContext.Provider>;
 };

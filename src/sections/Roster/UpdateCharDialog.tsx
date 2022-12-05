@@ -6,8 +6,10 @@ import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { names, ClassName } from '../../types/ClassName';
-import { v4 } from 'uuid';
 import { Character } from '../../types/Character';
 
 interface UpdateCharDialogProps {
@@ -17,24 +19,31 @@ interface UpdateCharDialogProps {
 }
 
 const UpdateCharDialog: React.FC<UpdateCharDialogProps> = ({ character, isOpen, setIsOpen }) => {
-    const { dispatch } = useContext(RosterContext) as RosterContextType;
+    const { roster, dispatch } = useContext(RosterContext) as RosterContextType;
     const [classValue, setClassValue] = useState<ClassName | null>(null);
     const [classInput, setClassInput] = useState('');
     const [nameInput, setNameInput] = useState('');
     const [ilvlInput, setIlvlInput] = useState(0);
+    const [isGoldEarningChar, setIsGoldEarningChar] = useState(character.gold_earning);
     const maxIlvl = 1640;
 
     useEffect(() => {
         setClassValue(character.class);
         setNameInput(character.name);
         setIlvlInput(character.ilvl);
+        setIsGoldEarningChar(character.gold_earning);
     }, [character]);
 
     const handleUpdateChar = () => {
         if (classValue && nameInput !== '') {
-            dispatch({ type: 'UPDATE_CHAR', payload: { ...character, name: nameInput, ilvl: ilvlInput, class: classValue } });
+            dispatch({ type: 'UPDATE_CHAR', payload: { ...character, name: nameInput, ilvl: ilvlInput, class: classValue, gold_earning: isGoldEarningChar } });
             setIsOpen(false);
         }
+    };
+
+    const handleRemoveChar = () => {
+        dispatch({ type: 'REMOVE_CHAR', payload: character.id });
+        setIsOpen(false);
     };
 
     return (
@@ -52,11 +61,18 @@ const UpdateCharDialog: React.FC<UpdateCharDialogProps> = ({ character, isOpen, 
             />
             <TextField value={ilvlInput} onChange={(event) => setIlvlInput(Number(event.target.value) > maxIlvl ? maxIlvl : Number(event.target.value))} type="number" label="Item level" inputProps={{ min: 0, max: maxIlvl }} />
 
+            <FormGroup>
+                <FormControlLabel
+                    control={<Checkbox checked={isGoldEarningChar} onChange={(event) => setIsGoldEarningChar(event.target.checked)} disabled={roster.filter((char) => char.gold_earning).length >= 6 && !character.gold_earning} />}
+                    label="Gold Earning Character"
+                />
+            </FormGroup>
+
             <div css={dialogButtonsContainerStyles}>
                 <Button color="primary" variant="outlined" onClick={() => setIsOpen(false)}>
                     Cancel
                 </Button>
-                <Button color="primary" variant="outlined" onClick={() => dispatch({ type: 'REMOVE_CHAR', payload: character.id })}>
+                <Button color="primary" variant="outlined" onClick={handleRemoveChar}>
                     Remove
                 </Button>
                 <Button color="primary" variant="outlined" onClick={handleUpdateChar}>

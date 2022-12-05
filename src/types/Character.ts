@@ -6,5 +6,6 @@ export type Character = {
     name: string;
     ilvl: number;
     class: ClassName;
+    gold_earning: boolean;
     progress: Progress;
 };

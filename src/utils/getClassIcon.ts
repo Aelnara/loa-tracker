@@ -1,73 +1,73 @@
 import { ClassName } from '../types/ClassName';
-import class_arcanist from '../assets/icons/class_arcanist.png';
-import class_artillerist from '../assets/icons/class_artillerist.png';
-import class_artist from '../assets/icons/class_artist.png';
-import class_bard from '../assets/icons/class_bard.png';
-import class_berserker from '../assets/icons/class_berserker.png';
-import class_deadeye from '../assets/icons/class_deadeye.png';
-import class_deathblade from '../assets/icons/class_deathblade.png';
-import class_destroyer from '../assets/icons/class_destroyer.png';
-import class_glaivier from '../assets/icons/class_glaivier.png';
-import class_gunlancer from '../assets/icons/class_gunlancer.png';
-import class_gunslinger from '../assets/icons/class_gunslinger.png';
-import class_machinist from '../assets/icons/class_machinist.png';
-import class_paladin from '../assets/icons/class_paladin.png';
-import class_reaper from '../assets/icons/class_reaper.png';
-import class_scrapper from '../assets/icons/class_scrapper.png';
-import class_shadowhunter from '../assets/icons/class_shadowhunter.png';
-import class_sharpshooter from '../assets/icons/class_sharpshooter.png';
-import class_sorceress from '../assets/icons/class_sorceress.png';
-import class_soulfist from '../assets/icons/class_soulfist.png';
-import class_striker from '../assets/icons/class_striker.png';
-import class_summoner from '../assets/icons/class_summoner.png';
-import class_wardancer from '../assets/icons/class_wardancer.png';
+import arcanist from '../assets/icons/class/arcanist.png';
+import artillerist from '../assets/icons/class/artillerist.png';
+import artist from '../assets/icons/class/artist.png';
+import bard from '../assets/icons/class/bard.png';
+import berserker from '../assets/icons/class/berserker.png';
+import deadeye from '../assets/icons/class/deadeye.png';
+import deathblade from '../assets/icons/class/deathblade.png';
+import destroyer from '../assets/icons/class/destroyer.png';
+import glaivier from '../assets/icons/class/glaivier.png';
+import gunlancer from '../assets/icons/class/gunlancer.png';
+import gunslinger from '../assets/icons/class/gunslinger.png';
+import machinist from '../assets/icons/class/machinist.png';
+import paladin from '../assets/icons/class/paladin.png';
+import reaper from '../assets/icons/class/reaper.png';
+import scrapper from '../assets/icons/class/scrapper.png';
+import shadowhunter from '../assets/icons/class/shadowhunter.png';
+import sharpshooter from '../assets/icons/class/sharpshooter.png';
+import sorceress from '../assets/icons/class/sorceress.png';
+import soulfist from '../assets/icons/class/soulfist.png';
+import striker from '../assets/icons/class/striker.png';
+import summoner from '../assets/icons/class/summoner.png';
+import wardancer from '../assets/icons/class/wardancer.png';
 
 const getClassIcon = (className: ClassName): string => {
     switch (className) {
         case 'Arcanist':
-            return class_arcanist;
+            return arcanist;
         case 'Artillerist':
-            return class_artillerist;
+            return artillerist;
         case 'Artist':
-            return class_artist;
+            return artist;
         case 'Bard':
-            return class_bard;
+            return bard;
         case 'Berserker':
-            return class_berserker;
+            return berserker;
         case 'Deadeye':
-            return class_deadeye;
+            return deadeye;
         case 'Deathblade':
-            return class_deathblade;
+            return deathblade;
         case 'Destroyer':
-            return class_destroyer;
+            return destroyer;
         case 'Glaivier':
-            return class_glaivier;
+            return glaivier;
         case 'Gunlancer':
-            return class_gunlancer;
+            return gunlancer;
         case 'Gunslinger':
-            return class_gunslinger;
+            return gunslinger;
         case 'Machinist':
-            return class_machinist;
+            return machinist;
         case 'Paladin':
-            return class_paladin;
+            return paladin;
         case 'Reaper':
-            return class_reaper;
+            return reaper;
         case 'Scrapper':
-            return class_scrapper;
+            return scrapper;
         case 'Shadowhunter':
-            return class_shadowhunter;
+            return shadowhunter;
         case 'Sharpshooter':
-            return class_sharpshooter;
+            return sharpshooter;
         case 'Sorceress':
-            return class_sorceress;
+            return sorceress;
         case 'Soulfist':
-            return class_soulfist;
+            return soulfist;
         case 'Striker':
-            return class_striker;
+            return striker;
         case 'Summoner':
-            return class_summoner;
+            return summoner;
         case 'Wardancer':
-            return class_wardancer;
+            return wardancer;
     }
 };
 
