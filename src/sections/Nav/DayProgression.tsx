@@ -82,6 +82,10 @@ const DayProgression: React.FC = () => {
 
 const stepperStyles = css`
     width: 400px;
+
+    @media (max-width: 1200px) {
+        display: none;
+    }
 `;
 
 export default DayProgression;
